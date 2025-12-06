@@ -1,8 +1,13 @@
+'use client';
+
 import React from 'react';
 import { LayoutDashboard, FileText, Settings, Plus, Bell, Search } from 'lucide-react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+    const pathname = usePathname();
+
     return (
         <div className="flex min-h-screen relative">
             {/* Sidebar */}
@@ -16,9 +21,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
                 <nav className="flex-1 px-6 py-8 space-y-3">
                     <div className="text-xs font-semibold text-white/40 uppercase tracking-wider mb-4 px-3 hidden lg:block">Menu</div>
-                    <NavLink href="/dashboard" icon={<LayoutDashboard size={20} />} label="Dashboard" active />
-                    <NavLink href="/quotes" icon={<FileText size={20} />} label="Quotes" />
-                    <NavLink href="/settings" icon={<Settings size={20} />} label="Settings" />
+                    <NavLink href="/dashboard" icon={<LayoutDashboard size={20} />} label="Dashboard" active={pathname === '/dashboard'} />
+                    <NavLink href="/quotes" icon={<FileText size={20} />} label="Quotes" active={pathname?.startsWith('/quotes') || false} />
+                    <NavLink href="/settings" icon={<Settings size={20} />} label="Settings" active={pathname === '/settings'} />
                 </nav>
 
                 <div className="p-6">
