@@ -4,53 +4,58 @@ import Link from 'next/link';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
     return (
-        <div className="flex min-h-screen">
+        <div className="flex min-h-screen relative">
             {/* Sidebar */}
-            <aside className="w-20 lg:w-64 fixed h-full z-20 glass-panel border-r border-white/10 flex flex-col transition-all duration-300">
-                <div className="p-6 flex items-center justify-center lg:justify-start gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/30">
-                        <span className="font-bold text-white">Q</span>
+            <aside className="w-20 lg:w-72 fixed h-full z-20 glass-panel flex flex-col transition-all duration-300">
+                <div className="p-8 flex items-center justify-center lg:justify-start gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-600 to-indigo-600 flex items-center justify-center shadow-[0_0_20px_rgba(124,58,237,0.3)] border border-white/10">
+                        <span className="font-bold text-white text-lg">Q</span>
                     </div>
-                    <span className="hidden lg:block font-bold text-xl tracking-tight text-glow">QUOTEAI</span>
+                    <span className="hidden lg:block font-bold text-2xl tracking-tight text-white">QUOTEAI</span>
                 </div>
 
-                <nav className="flex-1 px-4 py-8 space-y-2">
+                <nav className="flex-1 px-6 py-8 space-y-3">
+                    <div className="text-xs font-semibold text-white/40 uppercase tracking-wider mb-4 px-3 hidden lg:block">Menu</div>
                     <NavLink href="/dashboard" icon={<LayoutDashboard size={20} />} label="Dashboard" active />
                     <NavLink href="/quotes" icon={<FileText size={20} />} label="Quotes" />
                     <NavLink href="/settings" icon={<Settings size={20} />} label="Settings" />
                 </nav>
 
-                <div className="p-4">
-                    <button className="w-full aspect-square lg:aspect-auto p-0 lg:p-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 transition-all flex items-center justify-center gap-2 group">
-                        <Plus size={20} className="text-indigo-400 group-hover:text-white transition-colors" />
-                        <span className="hidden lg:block font-medium text-sm">New Quote</span>
-                    </button>
+                <div className="p-6">
+                    <Link href="/quotes/new" className="w-full aspect-square lg:aspect-auto p-0 lg:p-4 rounded-2xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:shadow-[0_0_30px_rgba(124,58,237,0.4)] border border-white/10 transition-all flex items-center justify-center gap-3 group relative overflow-hidden">
+                        <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                        <Plus size={20} className="text-white relative z-10" />
+                        <span className="hidden lg:block font-semibold text-white relative z-10">New Quote</span>
+                    </Link>
                 </div>
             </aside>
 
             {/* Main Content */}
-            <main className="flex-1 ml-20 lg:ml-64 p-8">
+            <main className="flex-1 ml-20 lg:ml-72 p-8 lg:p-12 relative z-10">
                 {/* Top Bar */}
-                <header className="flex justify-between items-center mb-10">
+                <header className="flex justify-between items-center mb-12">
                     <div>
-                        <h1 className="text-3xl font-bold mb-1 text-glow">Dashboard</h1>
-                        <p className="text-white/60 text-sm">Welcome back, Evan</p>
+                        <h1 className="text-4xl font-bold mb-2 text-white tracking-tight">Dashboard</h1>
+                        <p className="text-white/50">Welcome back, Evan</p>
                     </div>
 
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-6">
                         <div className="relative hidden md:block group">
-                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40 group-focus-within:text-white/80 transition-colors" size={18} />
+                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40 group-focus-within:text-white transition-colors" size={20} />
                             <input
                                 type="text"
-                                placeholder="Search quotes..."
-                                className="bg-white/5 border border-white/10 rounded-full py-2 pl-10 pr-4 text-sm focus:outline-none focus:bg-white/10 focus:border-white/20 w-64 transition-all"
+                                placeholder="Search..."
+                                className="bg-white/5 border border-white/10 rounded-2xl py-3 pl-12 pr-6 text-sm focus:outline-none focus:bg-white/10 focus:border-white/20 w-80 transition-all placeholder:text-white/20 text-white"
                             />
                         </div>
-                        <button className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-all relative">
-                            <Bell size={18} className="text-white/80" />
-                            <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-indigo-500 shadow-[0_0_8px_rgba(99,102,241,0.6)]"></span>
-                        </button>
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 border-2 border-white/20 shadow-lg"></div>
+
+                        <div className="flex items-center gap-4 pl-4 border-l border-white/10">
+                            <button className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-all relative group">
+                                <Bell size={20} className="text-white/60 group-hover:text-white transition-colors" />
+                                <span className="absolute top-3 right-3 w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)] border-2 border-[#0a0f0c]"></span>
+                            </button>
+                            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-violet-500 to-fuchsia-500 border-2 border-white/10 shadow-lg cursor-pointer hover:scale-105 transition-transform"></div>
+                        </div>
                     </div>
                 </header>
 
@@ -65,17 +70,20 @@ function NavLink({ href, icon, label, active = false }: { href: string, icon: Re
         <Link
             href={href}
             className={`
-        flex items-center gap-3 px-3 py-3 rounded-xl transition-all duration-200 group
+        flex items-center gap-4 px-4 py-4 rounded-2xl transition-all duration-300 group relative overflow-hidden
         ${active
-                    ? 'bg-white/10 text-white shadow-[0_0_20px_rgba(255,255,255,0.05)] border border-white/10'
-                    : 'text-white/60 hover:text-white hover:bg-white/5'
+                    ? 'text-white shadow-[0_0_20px_rgba(0,0,0,0.2)]'
+                    : 'text-white/50 hover:text-white hover:bg-white/5'
                 }
       `}
         >
-            <span className={`${active ? 'text-indigo-400' : 'group-hover:text-indigo-400'} transition-colors`}>
+            {active && (
+                <div className="absolute inset-0 bg-gradient-to-r from-violet-600/20 to-transparent border-l-4 border-violet-500"></div>
+            )}
+            <span className={`${active ? 'text-violet-400' : 'group-hover:text-violet-400'} transition-colors relative z-10`}>
                 {icon}
             </span>
-            <span className="hidden lg:block font-medium text-sm">{label}</span>
+            <span className="hidden lg:block font-medium relative z-10">{label}</span>
         </Link>
     );
 }
